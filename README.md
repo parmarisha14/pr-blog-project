@@ -58,7 +58,7 @@ BlogProject/
 │   └── images/             # Placeholder and uploaded images
 │
 └── node_modules/           # Installed dependencies
-
+```
 # 📖 Blog Project
 
 A modern **Blog Application** built with **Node.js, Express, and MongoDB**, featuring authentication, post management, and dynamic rendering using templating.  
