@@ -43,19 +43,39 @@ module.exports.updateBlog = async (req, res) => {
 
 // Like blog
 module.exports.likeBlog = async (req, res) => {
-  await Blog.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } });
-  res.redirect("back");
+  try {
+    await Blog.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } });
+    // Redirect to the previous page
+    res.redirect(req.get('referer') || '/'); 
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
 };
 
 // Dislike blog
 module.exports.dislikeBlog = async (req, res) => {
-  await Blog.findByIdAndUpdate(req.params.id, { $inc: { dislikes: 1 } });
-  res.redirect("back");
+  try {
+    await Blog.findByIdAndUpdate(req.params.id, { $inc: { dislikes: 1 } });
+    res.redirect(req.get('referer') || '/'); 
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
 };
 
 // Comment blog
 module.exports.commentBlog = async (req, res) => {
-  const comment = { text: req.body.comment, createdAt: new Date() };
-  await Blog.findByIdAndUpdate(req.params.id, { $push: { comments: comment } });
-  res.redirect("back");
+  try {
+    const comment = {
+      text: req.body.comment,
+      user: req.user.username,
+      createdAt: new Date()
+    };
+    await Blog.findByIdAndUpdate(req.params.id, { $push: { comments: comment } });
+    res.redirect(req.get('referer') || '/'); 
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
 };
