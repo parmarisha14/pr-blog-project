@@ -1,0 +1,66 @@
+<%- include("partials/header") %>
+
+<div class="container mt-5">
+  <!-- Page Header -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-primary">📝 Add Blog</h1>
+    <p class="text-muted">Share your thoughts, stories, or experiences with the world.</p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5 bg-white">
+          <form action="/addblog" method="post">
+            
+            <!-- Title -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Blog Title</label>
+              <input 
+                type="text" 
+                name="title" 
+                class="form-control form-control-lg rounded-3 shadow-sm" 
+                placeholder="Enter your blog title here..." 
+                required>
+            </div>
+
+            <!-- Content -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Content</label>
+              <textarea 
+                name="content" 
+                class="form-control rounded-3 shadow-sm" 
+                rows="7" 
+                placeholder="Write your blog content here..." 
+                required></textarea>
+            </div>
+
+            <!-- Image -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Image URL (optional)</label>
+              <input 
+                type="text" 
+                name="image" 
+                class="form-control form-control-lg rounded-3 shadow-sm" 
+                placeholder="Paste an image link (optional)">
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+              <a href="/" class="btn btn-outline-secondary px-4 py-2 rounded-3">
+                ⬅️ Back
+              </a>
+              <button type="submit" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm">
+                🚀 Publish Blog
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+
+<div class="container mt-5">
+  <h2>My Profile</h2>
+  <p>Username: <%= user.username %></p>
+  <p>Email: <%= user.email %></p>
+
+  <h3>My Blogs</h3>
+  <% if (blogs.length > 0) { %>
+    <div class="row">
+      <% blogs.forEach(blog => { %>
+        <div class="col-md-6 col-lg-4 mb-3">
+          <div class="card">
+            <% if (blog.image) { %>
+              <img src="<%= blog.image %>" class="card-img-top">
+            <% } %>
+            <div class="card-body">
+              <h5><%= blog.title %></h5>
+              <p><%= blog.content.substring(0, 100) %>...</p>
+              <a href="/edit/<%= blog._id %>" class="btn btn-warning btn-sm">Edit</a>
+              <a href="/delete/<%= blog._id %>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this blog?');">Delete</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p>No blogs yet.</p>
+  <% } %>
+</div>
+
+<%- include("partials/footer") %>

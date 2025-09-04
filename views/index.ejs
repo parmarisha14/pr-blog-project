@@ -1,0 +1,34 @@
+<%- include("partials/header") %>
+
+<div class="container mt-5">
+  <div class="row">
+    <% if (blogs && blogs.length > 0) { %>
+      <% blogs.forEach(blog => { %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-lg border-0 rounded-4 h-100">
+            <% if (blog.image) { %>
+              <img src="<%= blog.image %>" class="card-img-top rounded-top-4" style="max-height:200px; object-fit:cover;">
+            <% } %>
+            <div class="card-body">
+              <h5 class="card-title fw-bold"><%= blog.title %></h5>
+              <p class="card-text text-muted"><%= blog.content.substring(0,100) %>...</p>
+              <p class="text-muted"><small>By: <%= blog.createdBy.username %></small></p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <form action="/like/<%= blog._id %>" method="POST" class="d-inline">
+                <button class="btn btn-outline-primary btn-sm">👍 Like (<%= blog.likes || 0 %>)</button>
+              </form>
+              <form action="/dislike/<%= blog._id %>" method="POST" class="d-inline">
+                <button class="btn btn-outline-danger btn-sm">👎 Dislike (<%= blog.dislikes || 0 %>)</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="text-muted">No blogs yet. Be the first to add one!</p>
+    <% } %>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
